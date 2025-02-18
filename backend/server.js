@@ -13,9 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB Connection
-mongoose.connect(
-    "mongodb+srv://avantika:newuser123@cluster0.lul9p.mongodb.net/sampleDb?retryWrites=true&w=majority&appName=Cluster0"
-).then(() => {
+mongoose.connect(process.env.MONGO_URI).then(() => {
     console.log("Connection established to DB");
 }).catch(() => {
     console.log("Not Connected");
@@ -33,8 +31,8 @@ const OTP = mongoose.model('otp', otpSchema);
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'avantikanandkumar@gmail.com',
-    pass: 'pcpn dfkl ibfp qfki',
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 
